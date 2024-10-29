@@ -40,14 +40,12 @@
         get => _level;
         set
         {
-            if (_level == 1)
-            {
-                if (value < 1)
-                    _level = 1;
-                else if (value > 10)
-                    _level = 10;
-                else _level = value;
-            }
+            if (value < 1)
+                _level = 1;
+            else if (value > 10)
+                _level = 10;
+            else _level = value;
+         
         }
     }
 
