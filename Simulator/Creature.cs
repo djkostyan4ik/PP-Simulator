@@ -79,4 +79,27 @@
         if (Level < 10)
             Level++;
     }
+
+
+    // Method to move in one direction
+    public void Go(Direction direction)
+    {
+        Console.WriteLine($"{Name} goes {direction.ToString().ToLower()}");
+    }
+
+
+    // Method to move in multiple directions
+    public void Go(Direction[] directions)
+    {
+        for (int i = 0; i < directions.Length; i++)
+        {
+            Go(directions[i]);
+        }
+    }
+
+    public void Go(string directions)
+    {
+        Go(DirectionParser.Parse(directions));
+    }
+
 }
