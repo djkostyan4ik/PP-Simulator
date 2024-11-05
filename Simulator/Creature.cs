@@ -1,6 +1,7 @@
 ﻿namespace Simulator;
- public class Creature
+public abstract class Creature
  {
+
     // Default value "Unknown"
     private string _name = "Unknown";
     
@@ -63,11 +64,10 @@
 
 
     // SayHi method
-    public void SayHi()
-    {
-        Console.WriteLine($"Hi, I'm {Name}, my level is {Level}!");
-    }
+    public abstract void SayHi();
 
+    // Power method
+    public abstract int Power { get; }
 
     // Readonly property Info
     public string Info => $"{Name} [{Level}]";
@@ -103,3 +103,4 @@
     }
 
 }
+
