@@ -44,5 +44,8 @@ public class Orc : Creature
     $"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}."
 );
 
-
+    public override string Info
+    {
+        get => $"{Name} [{Level}][{Rage}]";
+    }
 }

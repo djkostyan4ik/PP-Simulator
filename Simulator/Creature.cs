@@ -70,7 +70,10 @@ public abstract class Creature
     public abstract int Power { get; }
 
     // Readonly property Info
-    public string Info => $"{Name} [{Level}]";
+    public abstract string Info 
+    {
+        get;
+    }
 
 
     // Upgrade() method
@@ -100,6 +103,11 @@ public abstract class Creature
     public void Go(string directions)
     {
         Go(DirectionParser.Parse(directions));
+    }
+
+    public override string ToString()
+    {
+        return $"{GetType().Name.ToUpper()}: {Info}";
     }
 
 }

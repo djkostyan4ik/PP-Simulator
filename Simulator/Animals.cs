@@ -40,7 +40,13 @@ public class Animals
 
 
     // Info property readonly
-    public string Info => $"{Description} <{Size}>";
+    public virtual string Info => $"{Description} <{Size}>";
+
+
+    public override string ToString()
+    {
+        return $"{GetType().Name.ToUpper()}: {Info}";
+    }
 
 }
 
