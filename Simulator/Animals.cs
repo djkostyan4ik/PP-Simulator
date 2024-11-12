@@ -6,10 +6,10 @@ public class Animals
 {
     // Default value "Unknown"
     private string _description = "Unknown";
-    public string Description 
+    public required string Description 
     {
         get => _description;
-        set
+        init
         {
             // Cannot have spaces at the beginning or end - remove excess
             _description = value?.Trim() ?? "Unknown";

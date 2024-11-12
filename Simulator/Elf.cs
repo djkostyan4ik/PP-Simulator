@@ -13,7 +13,7 @@ public class Elf : Creature
     public int Agility 
     { 
         get => _agility;
-        set
+        private set
         {
             if (value < 0)
                 _agility = 0;
@@ -41,9 +41,10 @@ public class Elf : Creature
         Agility = agility;
     }
 
-    public override void SayHi() => Console.WriteLine(
-    $"Hi, I'm {Name}, my level is {Level}, my agility is {Agility}."
-);
+    public override void SayHi()
+    {
+        Console.WriteLine($"Hi, I'm {Name}, my level is {Level}, my agility is {Agility}.");
+    }
 
     public override string Info
     {

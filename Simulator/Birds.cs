@@ -19,4 +19,5 @@ internal class Birds : Animals
     {
         return $"{GetType().Name.ToUpper()}: {Info}";
     }
+
 }
