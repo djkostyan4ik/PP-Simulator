@@ -1,16 +1,37 @@
-﻿namespace Simulator.Maps;
+﻿using System.Drawing;
+
+namespace Simulator.Maps;
 
 /// <summary>
 /// Map of points.
 /// </summary>
 public abstract class Map
 {
+    private readonly Rectangle _map;
+    public readonly int SizeX;
+    public readonly int SizeY;
+
+    protected Map(int sizeX, int sizeY) 
+    {
+        if (sizeX < 5)
+        {
+            throw new ArgumentOutOfRangeException(nameof(sizeX), "Too narrow.");
+        }
+        if (sizeY < 5) 
+        {
+            throw new ArgumentOutOfRangeException(nameof(sizeY), "Too short.");
+        }
+        SizeX = sizeX;
+        SizeY = sizeY;
+        _map = new Rectangle(0, 0, SizeX - 1, SizeY - 1);
+    }
+
     /// <summary>
     /// Check if give point belongs to the map.
     /// </summary>
     /// <param name="p">Point to check.</param>
     /// <returns></returns>
-    public abstract bool Exist(Point p);
+    public virtual bool Exist(Point p) => _map.Contains(p);
 
     /// <summary>
     /// Next position to the point in a given direction.
