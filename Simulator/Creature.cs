@@ -3,6 +3,8 @@
 namespace Simulator;
 public abstract class Creature
  {
+    public Map? Map { get; private set; }
+    public Point Position { get; private set; }
 
     // Default value "Unknown"
     private string _name = "Unknown";
@@ -86,23 +88,37 @@ public abstract class Creature
     }
 
 
-    // Method to move in one direction
-    public string Go(Direction direction) => $"{direction.ToString().ToLower()}";
-
-
     // Method to move in multiple directions
-    public string[] Go(Direction[] directions)
+    public void InitMapAndPosition(Map map, Point position)
     {
-        var result = new string[directions.Length];
-
-        for (int i = 0; i < directions.Length; i++)
+        if (map == null)
         {
-            result[i] = Go(directions[i]);
+            throw new ArgumentNullException(nameof(map));
         }
-        return result;
+        if (Map != null)
+        {
+            throw new InvalidOperationException($"This creature is already on a map. It cannot be moved to a new map.");
+        }
+        if (!map.Exist(position))
+        {
+            throw new ArgumentException("Non-existing position for this map.");
+        }
+        Map = map;
+        Position = position;
+        map.Add(this, position);
     }
 
-    public string[] Go(string directions) => Go(DirectionParser.Parse(directions));
+    public string Go(Direction direction)
+    {
+        if (Map == null)
+        {
+            throw new InvalidOperationException("Creature cannot move since it's not on the map!");
+        }
+        var newPosition = Map.Next(Position, direction);
+        Map.Move(this, Position, newPosition);
+        Position = newPosition;
+        return $"{Name} goes {direction.ToString().ToLower()}.";
+    }
 
     public override string ToString()
     {

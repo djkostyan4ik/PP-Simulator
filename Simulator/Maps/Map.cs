@@ -26,6 +26,21 @@ public abstract class Map
         _map = new Rectangle(0, 0, SizeX - 1, SizeY - 1);
     }
 
+    public abstract void Add(Creature creature, Point position);
+    public abstract void Remove(Creature creature, Point position);
+    public void Move(Creature creature, Point posFrom, Point posTo)
+    {
+        if (!Exist(posFrom) || !Exist(posTo))
+        {
+            throw new ArgumentException("Oops! One of the positions is out of map!");
+        }
+        Add(creature, posTo);
+        Remove(creature, posFrom);
+    }
+    public abstract List<Creature>? At(int x, int y);
+    public abstract List<Creature>? At(Point position);
+
+
     /// <summary>
     /// Check if give point belongs to the map.
     /// </summary>

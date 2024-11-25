@@ -13,7 +13,9 @@ public class SmallSquareMapTests
         // Act
         var map = new SmallSquareMap(size);
         // Assert
-        Assert.Equal(size, map.Size);
+        Assert.Equal(size, map.SizeX);
+        Assert.Equal(size, map.SizeY);
+
     }
 
     [Theory]
@@ -88,7 +90,7 @@ public class SmallSquareMapTests
         Direction direction, int expectedX, int expectedY)
     {
         // Arrange
-        var map = new SmallTorusMap(20);
+        var map = new SmallSquareMap(20);
         var point = new Point(x, y);
         // Act
         var nextPoint = map.NextDiagonal(point, direction);

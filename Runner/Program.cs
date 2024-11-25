@@ -7,75 +7,51 @@ public class Program
     {
         Console.WriteLine("Starting Simulator!\n");
 
-        Lab5a();
-        Lab5b();
+        Lab7();
 
     }
 
-    static void Lab5a() 
+    static void Lab7() 
     {
+        var squareMap = new SmallSquareMap(5);
+        var torusMap = new SmallTorusMap(5, 5);
 
-        try
-        {
+        var elf = new Elf("Elf1", 3, 5);
+        var elf2 = new Elf("Elf2", 1, 4);
+        var orc = new Orc("Orc1", 2, 4);
 
-            var rect1 = new Rectangle(1, 2, 5, 6);
-            Console.WriteLine($"Rectangle 1: {rect1}");
-            
-            var p1 = new Point(3, 4);
-            var p2 = new Point(7, 8);
-            var rect2 = new Rectangle(p1, p2);
-            Console.WriteLine($"Rectangle 2: {rect2}");
+        elf.InitMapAndPosition(squareMap, new Point(4, 4));
+        elf2.InitMapAndPosition(squareMap, new Point(3, 3));
+        //elf2.InitMapAndPosition(torusMap, new Point(3, 3));
+        orc.InitMapAndPosition(torusMap, new Point(0, 0));
 
-            var rect3 = new Rectangle(6, 5, 3, 2);
-            Console.WriteLine($"Rectangle 3: {rect3}");
+        Console.WriteLine($"Initial Position on Square Map (Elf): {elf.Position}");
+        Console.WriteLine($"Initial Position on Torus Map (Orc): {orc.Position}");
 
-            try
-            {
-                var rect4 = new Rectangle(2, 2, 2, 5);
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
+        Console.WriteLine(elf.Go(Direction.Up));
+        Console.WriteLine(elf.Go(Direction.Right));
 
-            var point1 = new Point(3, 4);
-            var point2 = new Point(9, 10);
-            Console.WriteLine($"Point {point1} is in rectangle: {rect1.Contains(point1)}");
-            Console.WriteLine($"Point {point2} is in rectangle: {rect2.Contains(point2)}");
+        Console.WriteLine(orc.Go(Direction.Right));
+        Console.WriteLine(orc.Go(Direction.Down));
 
-        }
-        catch (ArgumentException ex) 
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
+        Console.WriteLine($"New Position on Square Map (Elf): {elf.Position}");
+        Console.WriteLine($"New Position on Torus Map (Orc): {orc.Position}");
 
-    }
-    
-    static void Lab5b() 
-    {
+        Console.WriteLine("Square Map Creatures at (2,2):");
+        var squareCreatures = squareMap.At(2, 2);
+        Console.WriteLine($"Number of creatures at (2, 2) on Square Map: {squareCreatures?.Count ?? 0}");
 
-        try
-        {
-            var map = new SmallSquareMap(8);
-            Console.WriteLine($"Map size: {map.Size}");
+        Console.WriteLine("Square Map Creatures at (3,3):");
+        var squareCreatures2 = squareMap.At(3, 3);
+        Console.WriteLine($"Number of creatures at (3, 3) on Square Map: {squareCreatures2?.Count ?? 0}");
 
-            var point1 = new Point(6, 7);
-            var point2 = new Point(10, 15);
+        Console.WriteLine("Torus Map Creatures at (0,0):");
+        var torusCreatures = torusMap.At(0, 0);
+        Console.WriteLine($"Number of creatures at (0, 0) on Torus Map: {torusCreatures?.Count ?? 0}");
 
-            Console.WriteLine($"Point {point1} is in the map: {map.Exist(point1)}");
-            Console.WriteLine($"Point {point2} is in the map: {map.Exist(point2)}");
-            
-            var point3 = new Point(6, 5);
-            var nextPoint = map.Next(point3, Direction.Left);
-            Console.WriteLine($"Next point: {nextPoint}");
-            var diagonalPoint = map.NextDiagonal(point3, Direction.Up);
-            Console.WriteLine($"Diagonal point: {diagonalPoint}");
-        }
-        catch (ArgumentOutOfRangeException ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-
+        Console.WriteLine("Torus Map Creatures at (1,4):");
+        var torusCreatures2 = torusMap.At(1, 4);
+        Console.WriteLine($"Number of creatures at (1, 4) on Torus Map: {torusCreatures2?.Count ?? 0}");
     }
 
 }
