@@ -34,8 +34,9 @@ public abstract class Map
         {
             throw new ArgumentException("Oops! One of the positions is out of map!");
         }
-        Add(creature, posTo);
+        
         Remove(creature, posFrom);
+        Add(creature, posTo);
     }
     public abstract List<Creature>? At(int x, int y);
     public abstract List<Creature>? At(Point position);

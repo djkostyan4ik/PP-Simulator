@@ -43,7 +43,7 @@ public class Orc : Creature
 
     public override string Info
     {
-        get => $"{Name} [{Level}][{Rage}]";
+        get => $"Orc: {Name} [{Level}][{Rage}]";
     }
 
 }
