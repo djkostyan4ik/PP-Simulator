@@ -1,7 +1,7 @@
 ﻿using Simulator.Maps;
 
 namespace Simulator;
-public abstract class Creature
+public abstract class Creature : IMappable
  {
     public Map? Map { get; private set; }
     public Point Position { get; private set; }
@@ -79,7 +79,6 @@ public abstract class Creature
         get;
     }
 
-
     // Upgrade() method
     public void Upgrade() 
     {
@@ -108,7 +107,7 @@ public abstract class Creature
         map.Add(this, position);
     }
 
-    public string Go(Direction direction)
+    public void Go(Direction direction)
     {
         if (Map == null)
         {
@@ -117,13 +116,11 @@ public abstract class Creature
         var newPosition = Map.Next(Position, direction);
         Map.Move(this, Position, newPosition);
         Position = newPosition;
-        return $"{Name} goes {direction.ToString().ToLower()}.";
     }
 
     public override string ToString()
     {
         return $"{GetType().Name.ToUpper()}: {Info}";
     }
-
 }
 

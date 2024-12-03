@@ -26,20 +26,15 @@ public abstract class Map
         _map = new Rectangle(0, 0, SizeX - 1, SizeY - 1);
     }
 
-    public abstract void Add(Creature creature, Point position);
-    public abstract void Remove(Creature creature, Point position);
-    public void Move(Creature creature, Point posFrom, Point posTo)
+    public abstract void Add(IMappable mappable, Point position);
+    public abstract void Remove(IMappable mappable, Point position);
+    public void Move(IMappable mappable, Point posFrom, Point posTo)
     {
-        if (!Exist(posFrom) || !Exist(posTo))
-        {
-            throw new ArgumentException("Oops! One of the positions is out of map!");
-        }
-        
-        Remove(creature, posFrom);
-        Add(creature, posTo);
+        Remove(mappable, posFrom);
+        Add(mappable, posTo);
     }
-    public abstract List<Creature>? At(int x, int y);
-    public abstract List<Creature>? At(Point position);
+    public abstract List<IMappable>? At(int x, int y);
+    public abstract List<IMappable>? At(Point position);
 
 
     /// <summary>
