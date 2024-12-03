@@ -31,7 +31,7 @@ public class Simulation
     /// <summary>
     /// List of directions.
     /// </summary>
-    public List<Direction> ParsedMoves { get; }
+    private List<Direction> ParsedMoves { get; }
 
     /// <summary>
     /// Has all moves been done?

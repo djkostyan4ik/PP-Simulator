@@ -22,6 +22,7 @@ public class MapVisualizer
             Console.Write($"{Box.Horizontal}{Box.TopMid}");
         }
         Console.WriteLine($"{Box.Horizontal}{Box.TopRight}");
+
         for (int y = _map.SizeY - 1; y >= 0; y--)
         {
             Console.Write(Box.Vertical);
@@ -35,7 +36,7 @@ public class MapVisualizer
                 else if (creatures != null && creatures.Count == 1)
                 {
                     var creature = creatures.First();
-                    Console.Write(creature is Orc ? "O" : "E");
+                    Console.Write(creature.Symbol);
                 }
                 else
                 {
@@ -44,6 +45,7 @@ public class MapVisualizer
                 Console.Write(Box.Vertical);
             }
             Console.WriteLine();
+
             if (y > 0)
             {
                 Console.Write(Box.MidLeft);

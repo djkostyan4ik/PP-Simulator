@@ -7,8 +7,6 @@ public class Program
     {
         Console.WriteLine("Starting Simulator!\n");
 
-        Lab7();
-
     }
 
     static void Lab7() 

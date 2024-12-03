@@ -79,6 +79,8 @@ public abstract class Creature : IMappable
         get;
     }
 
+    public virtual char Symbol => 'C';
+
     // Upgrade() method
     public void Upgrade() 
     {
