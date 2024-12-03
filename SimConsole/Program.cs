@@ -7,6 +7,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
+
         Console.OutputEncoding = Encoding.UTF8;
         SmallSquareMap squareMap = new(5);
 
@@ -65,5 +66,6 @@ internal class Program
                 break;
             }
         }
+
     }
 }
