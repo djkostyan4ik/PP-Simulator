@@ -9,10 +9,7 @@ internal class Program
     {
 
         Console.OutputEncoding = Encoding.UTF8;
-        SmallSquareMap squareMap = new(5);
-
-
-        SmallTorusMap torusMap = new(8, 6);
+        BigBounceMap map = new BigBounceMap(8,6);
 
         List<IMappable> creatures2 = new()
         {
@@ -32,13 +29,13 @@ internal class Program
             new Point(0, 0)
         };
 
-        string moves2 = "druldldrdlrluuu";
+        string moves2 = "druldldrdlrluuulllll";
 
 
 
 
-        Simulation simulation = new Simulation(torusMap, creatures2, points2, moves2);
-        MapVisualizer mapVisualizer = new MapVisualizer(torusMap);
+        Simulation simulation = new Simulation(map, creatures2, points2, moves2);
+        MapVisualizer mapVisualizer = new MapVisualizer(map);
 
         Console.WriteLine("Simulation!");
         Console.WriteLine();

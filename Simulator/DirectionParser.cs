@@ -30,4 +30,16 @@ public static class DirectionParser
         return directions;
     }
 
+
+    public static Direction Reverse(Direction direction) 
+    {
+        return direction switch
+        {
+            Direction.Up => Direction.Down,
+            Direction.Down => Direction.Up,
+            Direction.Left => Direction.Right,
+            Direction.Right => Direction.Left,
+            _ => throw new ArgumentException("Invalid direction")
+        };
+    }
 }
