@@ -1,38 +1,41 @@
 ﻿using Simulator.Maps;
 
 namespace Simulator;
-public class SimulationHistory 
+public class SimulationHistory
 {
-    private readonly List<State> _history = new();
+    private Simulation _simulation { get; }
+    public int SizeX { get; }
+    public int SizeY { get; }
+    public List<SimulationTurnLog> TurnLogs { get; } = [];
+    // store starting positions at index 0
 
-    public void SaveState(int turn, Dictionary<IMappable, Point> positions, IMappable currentMappable, Direction? currentMove) =>
-        _history.Add(new State
-        {
-            Turn = turn,
-            Positions = new Dictionary<IMappable, Point>(positions),
-            CurrentMappable = currentMappable,
-            CurrentMove = currentMove
-        });
-    public void ShowState(int turn)
+    public SimulationHistory(Simulation simulation)
     {
-        if (turn < 0 || turn >= _history.Count)
-        {
-            Console.WriteLine("Invalid turn.");
-            return;
-        }
-        var state = _history[turn];
-        Console.WriteLine($"Turn: {turn}");
-        if (state.CurrentMappable != null && state.CurrentMove.HasValue) Console.WriteLine($"{state.CurrentMappable.ToString()} moved {state.CurrentMove}");
-
-        foreach (var entry in state.Positions) Console.WriteLine($"{entry.Key} is at {entry.Value}");
+        _simulation = simulation ??
+            throw new ArgumentNullException(nameof(simulation));
+        SizeX = _simulation.Map.SizeX;
+        SizeY = _simulation.Map.SizeY;
+        Run();
     }
 
-    private class State
+    private void Run()
     {
-        public int Turn { get; set; }
-        public Dictionary<IMappable, Point> Positions { get; set; } = new();
-        public IMappable? CurrentMappable { get; set; }
-        public Direction? CurrentMove { get; set; }
+        var map = _simulation.Map;
+        while (!_simulation.Finished)
+        {
+            var currentMappable = _simulation.CurrentMappable;
+            var move = _simulation.CurrentMoveName;
+            var symbols = _simulation.Mappables.ToDictionary(
+                m => m.Position,
+                m => m.Symbol
+                );
+            TurnLogs.Add(new SimulationTurnLog
+            {
+                Mappable = currentMappable.ToString(),
+                Move = move,
+                Symbols = symbols
+            });
+            _simulation.Turn();
+        }
     }
 }
-
