@@ -11,6 +11,8 @@ public abstract class Map
     public readonly int SizeX;
     public readonly int SizeY;
 
+    Dictionary<Point, List<IMappable>>? _fields;
+
     protected Map(int sizeX, int sizeY) 
     {
         if (sizeX < 5)
@@ -24,18 +26,48 @@ public abstract class Map
         SizeX = sizeX;
         SizeY = sizeY;
         _map = new Rectangle(0, 0, SizeX - 1, SizeY - 1);
+        _fields = new Dictionary<Point, List<IMappable>>();
     }
 
-    public abstract void Add(IMappable mappable, Point position);
-    public abstract void Remove(IMappable mappable, Point position);
+    public void Add(IMappable mappable, Point position)
+    {
+        CheckIfPositionWithinMap(position);
+
+        if (!_fields.ContainsKey(position))
+        {
+            _fields[position] = new List<IMappable>();
+        }
+
+        _fields[position].Add(mappable);
+    }
+
+    public void Remove(IMappable mappable, Point position)
+    {
+        CheckIfPositionWithinMap(position);
+
+        if (_fields.ContainsKey(position))
+        {
+            _fields[position].Remove(mappable);
+            if (_fields[position].Count == 0)
+            {
+                _fields.Remove(position);
+            }
+        }
+    }
+
+    public List<IMappable>? At(Point position)
+    {
+        CheckIfPositionWithinMap(position);
+        return _fields.ContainsKey(position) ? _fields[position] : null;
+    }
+
+    public List<IMappable>? At(int x, int y) => At(new Point(x, y));
+
     public void Move(IMappable mappable, Point posFrom, Point posTo)
     {
         Remove(mappable, posFrom);
         Add(mappable, posTo);
     }
-    public abstract List<IMappable>? At(int x, int y);
-    public abstract List<IMappable>? At(Point position);
-
 
     /// <summary>
     /// Check if give point belongs to the map.
@@ -60,4 +92,9 @@ public abstract class Map
     /// <param name="d">Direction.</param>
     /// <returns>Next point.</returns>
     public abstract Point NextDiagonal(Point p, Direction d);
+
+    private void CheckIfPositionWithinMap(Point position)
+    {
+        if (!Exist(position)) throw new ArgumentException("Position outside the map.");
+    }
 }
