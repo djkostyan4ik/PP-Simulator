@@ -29,7 +29,7 @@ internal class Program
             new Point(0, 0)
         };
 
-        string moves2 = "druldldrdlrluuulllll";
+        string moves2 = "drrluud";
 
 
 
@@ -44,25 +44,30 @@ internal class Program
         mapVisualizer.Draw();
         int turn = 1;
 
-        while (!simulation.Finished)
-        {
-            Console.WriteLine("Press any key to continue:");
-            ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
-            Console.WriteLine($"Turn {turn}");
-            Console.WriteLine($"{simulation.CurrentMappable} moves {simulation.CurrentMoveName}");
+        //while (!simulation.Finished)
+        //{
+        //    Console.WriteLine("Press any key to continue:");
+        //    ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+        //    Console.WriteLine($"Turn {turn}");
+        //    Console.WriteLine($"{simulation.CurrentMappable} moves {simulation.CurrentMoveName}");
 
-            if (keyInfo.Key != ConsoleKey.Escape)
-            {
-                simulation.Turn();
-                mapVisualizer.Draw();
-                turn++;
-            }
-            else 
-            {
-                Console.WriteLine("Exiting...");
-                break;
-            }
-        }
+        //    if (keyInfo.Key != ConsoleKey.Escape)
+        //    {
+        //        simulation.Turn();
+        //        mapVisualizer.Draw();
+        //        turn++;
+        //    }
+        //    else 
+        //    {
+        //        Console.WriteLine("Exiting...");
+        //        break;
+        //    }
+        //}
+
+        var history = new SimulationHistory(simulation); 
+        var logVisualizer = new LogVisulizer(history);
+        logVisualizer.Draw(5);
+        logVisualizer.Draw(3);
 
     }
 }
