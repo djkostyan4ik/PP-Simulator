@@ -13,6 +13,25 @@ public class Program
 
     static void Lab7() 
     {
+        var creatures = new List<Creature>
+            {
+            new Orc("Gorbag") { Level = 5, Rage = 10 },
+            new Elf("Elandor") { Level = 5, Agility = 7 },
+            new Orc("Gorbag") { Level = 2, Rage = 5 },
+            new Elf("Elandor") { Level = 5, Agility = 12 },
+            new Orc("Gorbag") { Level = 8, Rage = 6 },
+            new Elf("Elandor") { Level = 5, Agility = 2 },
+            new Orc("Gorbag") { Level = 1, Rage = 2 },
+            new Elf("Elandor") { Level = 5, Agility = 4 },
+            new Orc("Gorbag") { Level = 2, Rage = 4 },
+            new Elf("Elandor") { Level = 5, Agility = 9 }
+            };
+        Console.WriteLine("Before sort:");
+        foreach (var creature in creatures) Console.WriteLine($"{creature.ToString()}, POWER: {creature.Power}");
+        creatures.Sort((cr1, cr2) => cr1.Power.CompareTo(cr2.Power));
+        Console.WriteLine("After sort:");
+        foreach (var creature in creatures) Console.WriteLine($"{creature.ToString()}, POWER: {creature.Power}");
+
         //var squareMap = new SmallSquareMap(5);
         //var torusMap = new SmallTorusMap(5, 5);
 

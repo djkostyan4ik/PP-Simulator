@@ -5,11 +5,10 @@ namespace Simulator;
 
 public class Elf : Creature
 {
-
-
     private int _agility;
 
     private int _singCount;
+
     [JsonIgnore]
     public override int Power => 8 * Level + 2 * Agility;
     [JsonIgnore]
@@ -20,7 +19,7 @@ public class Elf : Creature
     public int Agility 
     { 
         get => _agility;
-        private set
+        set
         {
             if (value < 0)
                 _agility = 0;
