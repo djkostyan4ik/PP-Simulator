@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace Simulator;
 
@@ -9,6 +10,11 @@ public class Elf : Creature
     private int _agility;
 
     private int _singCount;
+    [JsonIgnore]
+    public override int Power => 8 * Level + 2 * Agility;
+    [JsonIgnore]
+    public override string Info => $"{Name} [{Level}][{Agility}]";
+    [JsonIgnore]
     public override char Symbol => 'E';
 
     public int Agility 
@@ -33,7 +39,7 @@ public class Elf : Creature
         }
     }
 
-    public override int Power => 8 * Level + 2 * Agility;
+    //public override int Power => 8 * Level + 2 * Agility;
 
     public Elf() : base() { }
 
@@ -45,8 +51,8 @@ public class Elf : Creature
     public override string Greeting() => $"Hi, I'm {Name}, my level is {Level}, my agility is {Agility}.";
   
 
-    public override string Info
-    {
-        get => $"Elf: {Name} [{Level}][{Agility}]"; 
-    }
+    //public override string Info
+    //{
+    //    get => $"Elf: {Name} [{Level}][{Agility}]"; 
+    //}
 }

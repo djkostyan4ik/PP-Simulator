@@ -1,0 +1,34 @@
+﻿@page
+@model SimGridModel
+@{
+    ViewData["Title"] = "Symulacja";
+}
+
+<div class="controls-container">
+    <form method="post" class="turn-controls">
+        <input type="image" src="/images/left.png" alt="Previous Turn" asp-page-handler="PreviousTurn" class="arrow-button left-arrow" />
+        <span class="turn-text">Tura: @Model.CurrentTurn</span>
+        <input type="image" src="/images/right.png" alt="Next Turn" asp-page-handler="NextTurn" class="arrow-button right-arrow" />
+    </form>
+</div>
+<div class="grid-container">
+    <table class="simulation-grid">
+        @for (int y = 0; y < Model.Grid.GetLength(0); y++)
+        {
+            <tr>
+                @for (int x = 0; x < Model.Grid.GetLength(1); x++)
+                {
+                    <td>
+                        @if (Model.Grid[y, x] != ' ')
+                        {
+                            <img src="@Model.GetImagePath(Model.Grid[y, x])" alt="Icon" class="grid-icon" />
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+<div class="info-container">
+    <p class="current-info">@Model.CurrentMappableInfo</p>
+</div>

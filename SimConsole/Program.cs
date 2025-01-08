@@ -29,7 +29,7 @@ internal class Program
             new Point(0, 0)
         };
 
-        string moves2 = "drrluud";
+        string moves2 = "dlrludluddlrulr";
 
 
 
@@ -67,7 +67,9 @@ internal class Program
         var history = new SimulationHistory(simulation); 
         var logVisualizer = new LogVisulizer(history);
         logVisualizer.Draw(5);
-        logVisualizer.Draw(3);
+        logVisualizer.Draw(10);
+        logVisualizer.Draw(15);
+        logVisualizer.Draw(20);
 
     }
 }
